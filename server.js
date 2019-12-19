@@ -43,7 +43,7 @@ let movies = [
 	{
 		id: 4,
 		title: "Dumb and Dumber",
-		director: "The Farrelly Brothers",
+		director: "The Farely Brothers",
 		metascore: 76,
 		stars: ["Jim Carrey", "Jeff Daniels", "Lauren Holly"],
 		poster: 'http://www.gstatic.com/tv/thumb/v22vodart/16298/p16298_v_v8_aa.jpg'
@@ -55,6 +55,14 @@ let movies = [
 		metascore: 89,
 		stars: ["Kurt Russell", "Bill Paxton", "Sam Elliot"],
 		poster: 'http://www.gstatic.com/tv/thumb/v22vodart/15292/p15292_v_v8_ap.jpg'
+	},
+	{
+		id: 6,
+		title: "Entourage: The Movie",
+		director: "Doug Ellin",
+		metascore: 100,
+		stars: ["Adrian Grenier", "Jeremy Piven", "Kevin Connolly", "Turtle", "Drama"],
+		poster: 'http://www.gstatic.com/tv/thumb/v22vodart/11352105/p11352105_v_v8_ac.jpg'
 	}
 ];
 
@@ -80,8 +88,9 @@ app.post("/api/movies", (req, res) => {
 });
 
 app.put("/api/movies/:id", (req, res) => {
-	if (!req.params.id)
+	if (!req.params.id) {
 		res.status(400).send("Your request is missing the movie id");
+	};
 	if (
 		req.body.id === undefined ||
 		!req.body.title ||
@@ -93,10 +102,10 @@ app.put("/api/movies/:id", (req, res) => {
 		res
 		.status(422)
 		.send("Make sure your request body has all the fields it needs");
-	}
+	};
 	movies = movies.map(movie => {
 		if (`${movie.id}` === req.params.id) {
-		return req.body;
+			return req.body;
 		}
 		return movie;
 	});
